@@ -5,10 +5,11 @@
 class Application
 {
 public:
-    void init();
+    bool init();
     void shutdown();
     void run();
 private:
+    bool is_running;
     Window * _window;
     Context _context;
     GameApplication * _game;
