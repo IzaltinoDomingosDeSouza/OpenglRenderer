@@ -33,4 +33,8 @@ public:
     virtual bool is_vsync() const = 0;
 
     virtual void apply_changes() = 0;
+
+    virtual void enable_mouse_cursor(bool enabled) = 0;
+
+    virtual void * get_native() = 0;
 };
