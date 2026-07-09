@@ -4,7 +4,9 @@ int main()
 {
     Application application;
 
-    application.init();
-    application.run();
-    application.shutdown();
+    if(application.init())
+    {
+        application.run();
+        application.shutdown();
+    }
 }
