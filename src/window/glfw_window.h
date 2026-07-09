@@ -28,6 +28,10 @@ public:
     void set_vsync(bool enabled) override;
     bool is_vsync() const override;
 
+    void enable_mouse_cursor(bool enabled) override;
+
+    void * get_native() override;
+
 private:
     GLFWwindow * _window = nullptr;
     std::string _title;

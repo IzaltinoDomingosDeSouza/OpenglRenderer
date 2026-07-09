@@ -112,3 +112,16 @@ bool GLFWWindow::is_vsync() const
 {
     return _vsync;
 }
+
+void GLFWWindow::enable_mouse_cursor(bool enabled)
+{
+    if(enabled)
+        glfwSetInputMode(_window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+    else
+        glfwSetInputMode(_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+}
+
+void * GLFWWindow::get_native()
+{
+    return reinterpret_cast<void *>(_window);
+}
