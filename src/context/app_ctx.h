@@ -1,4 +1,4 @@
-#pragma onc
+#pragma once
 
 #include "../core/types.h"
 #include "../window/window.h"
@@ -6,7 +6,7 @@
 class AppCtx
 {
 public:
-    explicit AppCtx(Window * window) : _window{window} {}
+    explicit AppCtx(Window * window) : _window{window}, _should_quit{false} {}
 
     AppCtx(const AppCtx &) = delete;
     AppCtx & operator=(const AppCtx &) = delete;
@@ -35,6 +35,24 @@ public:
         auto size = get_screen_size();
         return static_cast<float>(size.width) / static_cast<float>(size.height);
     }
+
+    void disable_mouse_cursor()
+    {
+        _window->enable_mouse_cursor(false);
+    }
+    void enable_mouse_cursor()
+    {
+        _window->enable_mouse_cursor(true);
+    }
+    void quit()
+    {
+        _should_quit = true;
+    }
+    bool should_quit() const
+    {
+        return _should_quit || _window->should_close();
+    }
 private:
     Window * _window;
+    bool _should_quit;
 };
