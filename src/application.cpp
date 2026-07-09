@@ -3,6 +3,7 @@
 #include "application.h"
 #include "context/context.h"
 #include "window/glfw_window.h"
+#include "window/glfw_input.h"
 
 bool Application::init()
 {
@@ -13,11 +14,12 @@ bool Application::init()
         return false;
     }
 
+    _input.init(_window);
+
     _context.application = new AppCtx(_window);
+    _context.input = new InputCtx(&_input);
 
     _game = create_gameapp();
-
-    is_running = true;
 
     return true;
 }
@@ -28,6 +30,7 @@ void Application::shutdown()
     destroy_gameapp(_game);
 
     delete _context.application;
+    delete _context.input;
 }
 
 void Application::run()
@@ -38,7 +41,7 @@ void Application::run()
     _window->apply_changes();
 
     double last_time = glfwGetTime();
-    while(!_window->should_close())
+    while(!_context.application->should_quit())
     {
         double current_time = glfwGetTime();
         double delta_time = current_time - last_time;

@@ -9,8 +9,8 @@ public:
     void shutdown();
     void run();
 private:
-    bool is_running;
     Window * _window;
+    GLFWInput _input;
     Context _context;
     GameApplication * _game;
 };

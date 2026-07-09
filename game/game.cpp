@@ -1,3 +1,4 @@
+#include <core/log.h>
 #include <game_application.h>
 
 class Game : public GameApplication
@@ -9,6 +10,9 @@ public:
 
         _context->application->set_title("Demo Game");
         _context->application->set_screen_size({800,600});
+        _context->application->enable_mouse_cursor();
+
+        context->input->bind_action("Quit", GLFW_KEY_ESCAPE);
     }
 
     void on_shutdown() override
@@ -23,7 +27,11 @@ public:
 
     void on_update(float delta_time) override
     {
-
+        if(_context->input->is_action_triggered("Quit"))
+        {
+            log_info("quit!");
+            _context->application->quit();
+        }
     }
 
     void on_render() override
