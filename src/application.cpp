@@ -1,9 +1,8 @@
-#include <glad/glad.h>
-
 #include "application.h"
 #include "context/context.h"
 #include "window/glfw_window.h"
 #include "window/glfw_input.h"
+#include "renderer/renderer.h"
 
 bool Application::init()
 {
@@ -15,9 +14,13 @@ bool Application::init()
     }
 
     _input.init(_window);
+    _renderer = new Renderer;
 
     _context.application = new AppCtx(_window);
     _context.input = new InputCtx(&_input);
+    _context.renderer = _renderer;
+
+    _context.renderer->init();
 
     _game = create_gameapp();
 
@@ -31,6 +34,9 @@ void Application::shutdown()
 
     delete _context.application;
     delete _context.input;
+
+    delete _renderer;
+    delete _window;
 }
 
 void Application::run()
@@ -50,9 +56,6 @@ void Application::run()
         _window->poll_events();
 
         _game->on_update(static_cast<float>(delta_time));
-
-        glClearColor(0.1f, 0.2f, 0.3f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
         _game->on_render();
 
         _window->swap_buffers();
