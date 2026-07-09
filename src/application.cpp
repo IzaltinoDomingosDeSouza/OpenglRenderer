@@ -21,6 +21,7 @@ bool Application::init()
 
     return true;
 }
+
 void Application::shutdown()
 {
 
@@ -28,18 +29,31 @@ void Application::shutdown()
 
     delete _context.application;
 }
+
 void Application::run()
 {
     _game->on_init(&_context);
     _game->on_preload();
 
     _window->apply_changes();
+
+    double last_time = glfwGetTime();
     while(!_window->should_close())
     {
-        glClearColor(0.1f, 0.2f, 0.3f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
+        double current_time = glfwGetTime();
+        double delta_time = current_time - last_time;
+        last_time = current_time;
 
         _window->poll_events();
+
+        _game->on_update(static_cast<float>(delta_time));
+
+        glClearColor(0.1f, 0.2f, 0.3f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
+        _game->on_render();
+
         _window->swap_buffers();
     }
+
+    _game->on_shutdown();
 }
