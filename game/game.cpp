@@ -1,4 +1,4 @@
-#include "game_application.h"
+#include <game_application.h>
 
 class Game : public GameApplication
 {
@@ -21,7 +21,7 @@ public:
 
     }
 
-    void on_update() override
+    void on_update(float delta_time) override
     {
 
     }

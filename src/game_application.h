@@ -8,7 +8,7 @@ public:
     virtual void on_init(Context * context) = 0;
     virtual void on_shutdown() = 0;
     virtual void on_preload() = 0;
-    virtual void on_update() = 0;
+    virtual void on_update(float delta_time) = 0;
     virtual void on_render() = 0;
 };
 
