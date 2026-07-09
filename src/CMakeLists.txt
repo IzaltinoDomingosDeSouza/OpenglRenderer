@@ -1,5 +1,5 @@
 add_library(opengl_renderer
-    types.h
+    core/types.h
     main.cpp
     application.h
     application.cpp
@@ -8,8 +8,8 @@ add_library(opengl_renderer
     context/app_ctx.h
     window/window.h
     window/glfw_window.h window/glfw_window.cpp
-    log.h
-    log.cpp
+    core/log.h
+    core/log.cpp
 )
 target_link_libraries(opengl_renderer PUBLIC glad glfw)
 target_include_directories(opengl_renderer PUBLIC

@@ -1,6 +1,6 @@
 #pragma onc
 
-#include "../types.h"
+#include "../core/types.h"
 #include "../window/window.h"
 
 class AppCtx

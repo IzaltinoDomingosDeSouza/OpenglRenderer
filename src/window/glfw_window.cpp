@@ -1,7 +1,7 @@
 #include <glad/glad.h>
 
 #include "glfw_window.h"
-#include "../log.h"
+#include "../core/log.h"
 
 bool GLFWWindow::init(const std::string & title, size_t width, size_t height)
 {
@@ -101,7 +101,6 @@ void GLFWWindow::apply_changes()
 
     glfwSetWindowTitle(_window, _title.c_str());
     glfwSetWindowSize(_window, static_cast<int>(_width), static_cast<int>(_height));
-    log_info(std::format("[]{}] {} {}",_title,_width,_height));
 }
 void GLFWWindow::set_vsync(bool enabled)
 {
